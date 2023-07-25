@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SchoolingActivityModel>
+@{
+}
+
+<h1>Schooling Activity Report</h1>
+<table>
+    <thead >
+        <tr>
+            <th>ID</th>
+            <th>Start Time</th>
+            <th>User First Name</th>
+            <th>User Last Name</th>
+            <th>User Age</th>
+            <th>User Email</th>
+            <th>Achieved Etape</th>
+            <th>Achieved Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.StartTime</td>
+                    @if (item.UserInfo != null)
+                    {
+                        <td>@item.UserInfo.FirstName</td>
+                        <td>@item.UserInfo.LastName</td>
+                        <td>@item.UserInfo.Age</td>
+                        <td>@item.UserInfo.Email</td>
+                    }
+                    <td>@item.AchievedEtape</td>
+                    <td>@item.AchievedTime</td>
+
+                    <td>
+                        <form asp-controller="Schooling" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit">REMOVE</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-controller="Schooling" asp-action="Edit" method="get">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit">EDIT</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>

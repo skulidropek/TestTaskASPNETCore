@@ -1,0 +1,40 @@
+﻿@model SchoolingActivityModel
+@{
+}
+
+<h1>Schooling Activity Report</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Start Time</th>
+            <th>User First Name</th>
+            <th>User Last Name</th>
+            <th>User Age</th>
+            <th>User Email</th>
+            <th>Achieved Etape</th>
+            <th>Achieved Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        <form asp-controller="Schooling" asp-action="Edit" method="post">
+            <tr>
+                <td><input type="hidden" asp-for="Id" />@Model.Id</td>
+                <td><input type="text" asp-for="StartTime" /></td>
+                    @if (Model.UserInfo != null)
+                    {
+                        <td><input type="text" asp-for="UserInfo.FirstName" /></td>
+                        <td><input type="text" asp-for="UserInfo.LastName" /></td>
+                        <td><input type="number" asp-for="UserInfo.Age" /></td>
+                        <td><input type="email" asp-for="UserInfo.Email" /></td>
+                    }
+                <td><input type="text" asp-for="AchievedEtape" /></td>
+                <td><input type="hidden" asp-for="AchievedTime" />@Model.AchievedTime</td>
+
+                <td>
+                    <button type="submit">Save</button>
+                </td>
+            </tr>
+        </form>
+    </tbody>
+</table>
